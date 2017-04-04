@@ -23,7 +23,7 @@
                 </div>
                 <div class="col2">
                     <label for="word"></label>
-                    <input type="text" name="word" id="word" value="" autofocus="autofocus" maxlength="20">
+                    <input type="text" name="word" id="word" value="{{ $word }}" autofocus="autofocus" maxlength="20">
                 </div>
             </div>
 
@@ -32,9 +32,9 @@
                     <p>Bonus points<p>
                 </div>
                 <div class="col2">
-                    <input type="radio" name="bonusPoints" id="bonusPointsNone" value="none"><label for="bonusPointsNone">None</label><br>
-                    <input type="radio" name="bonusPoints" id="bonusPointsDouble" value="double"><label for="bonusPointsDouble">Double word score</label><br>
-                    <input type="radio" name="bonusPoints" id="bonusPointsTriple" value="triple"><label for="bonusPointsTriple">Triple word score</label>
+                    <input type="radio" name="bonusPoints" id="bonusPointsNone" value="none" {{ ($bonusPoints=='none') ? 'CHECKED' : ''}}><label for="bonusPointsNone">None</label><br>
+                    <input type="radio" name="bonusPoints" id="bonusPointsDouble" value="double" {{ ($bonusPoints=='double') ? 'CHECKED' : ''}}><label for="bonusPointsDouble">Double word score</label><br>
+                    <input type="radio" name="bonusPoints" id="bonusPointsTriple" value="triple" {{ ($bonusPoints=='triple') ? 'CHECKED' : ''}}><label for="bonusPointsTriple">Triple word score</label>
                 </div>
             </div>
 
@@ -44,7 +44,7 @@
                     <p class="comment">(word that uses all 7 tiles)</p>
                 </div>
                 <div class="col2">
-                    <input type="checkbox" name="bingo" id="bingo">
+                    <input type="checkbox" name="bingo" id="bingo" {{ ($bingo) ? 'CHECKED' : ''}}>
                     <label for="bingo">Yes</label>
                 </div>
             </div>
@@ -52,6 +52,17 @@
             <input type="submit" value="Calculate">
 
         </form>
+
+        @if(count($errors) > 0)
+            <div class="result error">
+                {{$errors->first()}}
+            </div>
+        @elseif($score != 0)
+            <div class="result ok">
+                "Your word is worth "{{$score}}" points"
+            </div>
+        @endif
+
     </div>
 
 @endsection
