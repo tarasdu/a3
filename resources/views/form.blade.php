@@ -11,7 +11,7 @@
 
 @section('content')
     <div id="container">
-        <h1>Scrabble Word Score Calculator(L)</h1>
+        <h1>Scrabble Word Score Calculator</h1>
         <img src="/img/scrabble.jpg" width="250" height="250" alt="scrabble scorecard">
 
         <form method="get" action="/">
